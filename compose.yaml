@@ -1,0 +1,29 @@
+services:
+  dns:
+    build: 
+      context: ./dns
+      dockerfile: Dockerfile
+    container_name: dns
+    ports:
+      - "53:53/udp"
+  
+  Server-01:
+    build: 
+      context: ./Server-01
+      dockerfile: Dockerfile
+    container_name: Server-01
+    networks:
+      - asa-network
+
+  Server-02:
+    build: 
+      context: ./Server-02
+      dockerfile: Dockerfile
+    container_name: Server-02
+    networks:
+      - asa-network
+      
+#Docker Networks
+networks:
+  asa-network:
+    driver: bridge
