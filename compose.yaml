@@ -1,0 +1,30 @@
+services:
+
+  dns:
+    build: 
+      context: ./dns
+      dockerfile: Dockerfile
+    container_name: dns
+    ports:
+      - "53:53/udp"
+    networks:
+      - minha-rede
+  server-01:
+    build: 
+      context: ./server-01
+      dockerfile: Dockerfile
+    container_name: server-01
+
+
+  server-02:
+    build: 
+      context: ./server-02
+      dockerfile: Dockerfile
+    container_name: server-02
+    networks:
+      - minha-rede
+
+
+networks:
+  minha-rede:
+    driver: bridge
